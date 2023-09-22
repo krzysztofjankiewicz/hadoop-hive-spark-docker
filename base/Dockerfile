@@ -75,7 +75,10 @@ RUN set -x \
  && tar -xf /tmp/hive.tar.gz -C $HIVE_HOME --strip-components 1 \
  && rm /tmp/hive*
 
-# Konfiguracja
+ENV HIVE_CONF_DIR=$HIVE_HOME/conf
+ENV PATH=$HIVE_HOME/sbin:$HIVE_HOME/bin:$PATH
+
+# Config
 COPY --chown=$USERNAME:$GROUPNAME conf/core-site.xml $HADOOP_CONF_DIR/
 COPY --chown=$USERNAME:$GROUPNAME conf/hdfs-site.xml $HADOOP_CONF_DIR/
 COPY --chown=$USERNAME:$GROUPNAME conf/yarn-site.xml $HADOOP_CONF_DIR/
